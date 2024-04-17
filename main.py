@@ -1,5 +1,6 @@
 from dash import Dash, html, dcc, callback, Output, Input, State
 import plotly.express as px, pandas as pd, datetime
+import components as comp
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
@@ -7,86 +8,11 @@ df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapmi
 
 app = Dash(__name__, external_stylesheets=external_stylesheets, title='Otsu project', update_title='Loading...')
 
-title = {
-    'size': '40',
-    'color': '#FFC300'
-}
-
-colors = {
-    'inpBackground': '#AEB6BF',
-    'outBackground': '#D6DBDF',
-    'darkBlue': '#1B3B56',
-    'text': '#111111'
-}
-
-container = {
-    'float': 'left',
-    'width': '50%',
-}
-
 app.layout = html.Div(children=[
-    html.H1(
-        children='Otsu Image Segmentation',
-        style={
-            'textAlign': 'center',
-            'color': colors['text']
-        }, 
-    ),
-
-    html.Div(children=[
-        html.Div(children=[
-            html.H3(
-                children="Upload images to be segmented"
-            ),
-            dcc.Upload(
-                id='upload-image',
-                children=html.Div([
-                    'Drag and Drop or ',
-                    html.A('Select Files')
-                ]),
-                style={
-                    'width': '70%',
-                    'height': '60px',
-                    'lineHeight': '60px',
-                    'borderWidth': '1px',
-                    'borderStyle': 'dashed',
-                    'borderRadius': '5px',
-                    'textAlign': 'center',
-                    'margin': 'auto'
-                },
-                multiple=True
-            ),
-        ], 
-        style={
-            'textAlign': 'center',
-            'float': 'left',
-            'width': '50%',
-            'height': '100vh',
-            'backgroundColor': colors['inpBackground'],
-        }),
-        html.Div(
-            style={
-                'textAlign': 'center',
-                'float': 'left',
-                'width': '50%',
-                'height': '100vh',
-                'backgroundColor': colors['outBackground']
-            },
-            children=[
-                html.H3(
-                    children="Output"
-                ),
-                html.Div(
-                    id='output-image-upload',
-                    style={
-                        'width': '80%',
-                        'margin': 'auto', 
-                        'backgroundColor': colors['inpBackground'],
-                    } 
-                )
-            ]
-        )
-    ])
+    #title
+    comp.head,
+    #body
+    html.Div(children = [comp.inputContainer, comp.outputContainer])
 ])
 
 def parse_contents(contents, filename, date):
