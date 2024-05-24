@@ -1,6 +1,5 @@
 from dash import Dash, dcc, html, Input, Output, State, callback
-
-import datetime
+import argparse, cv2, datetime
 
 title = {
     'size': '40',
@@ -48,18 +47,19 @@ uploadImages = dcc.Upload(
 
 filterRadioButtons = html.Div(children = [
                         dcc.RadioItems(
+                            id='filter-radio-buttons',
                             options={
-                                'r': 'Red',
-                                'g': 'Green',
-                                'b': 'Blue',
-                                'h': 'Hue',
-                                's': 'Saturation',
-                                'v': 'Value',
-                                'l': 'Lightness',
-                                'rg': 'Red-greeness',
-                                'by': 'Blue-yellowness'
+                                'Red': 'Red',
+                                'Green': 'Green',
+                                'Blue': 'Blue',
+                                'Hue': 'Hue',
+                                'Saturation': 'Saturation',
+                                'Value': 'Value',
+                                'Lightness': 'Lightness',
+                                'Red-greeness': 'Red-greeness',
+                                'Blue-yellowness': 'Blue-yellowness'
                             },
-                            value='r'
+                            value='Red'
                         )
                     ])
 
@@ -96,6 +96,40 @@ outputContainer = html.Div(
                                 'margin': 'auto', 
                                 'backgroundColor': colors['inpBackground'],
                             } 
+                        ),
+                        html.Hr(),
+                        html.H3(id='selected-filter'),
+                        html.Hr(),
+                        html.Div(
+                            id='output-color-spaced-image',
+                            style={
+                                'width': '80%',
+                                'margin': 'auto', 
+                                'backgroundColor': colors['inpBackground'],
+                            } 
                         )
                     ]
+                )
+
+mainContainer = html.Div(
+                    children=[
+                        head,
+                        html.Div(
+                            id='main-container',
+                            children=[
+                                inputContainer,
+                                outputContainer
+                            ],
+                            style={
+                                'width': '100%',
+                                'height': '100vh',
+                                'backgroundColor': colors['inpBackground']
+                            }
+                        )
+                    ],
+                    style={
+                        'width': '100%',
+                        'height': '100vh',
+                        'backgroundColor': colors['inpBackground']
+                    }
                 )
