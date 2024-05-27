@@ -1,21 +1,10 @@
-from dash import Dash, dcc, html, Input, Output, State, callback
-import argparse, cv2, datetime
-
-title = {
-    'size': '40',
-    'color': '#FFC300'
-}
+from dash import dcc, html
 
 colors = {
     'inpBackground': '#AEB6BF',
     'outBackground': '#D6DBDF',
     'darkBlue': '#1B3B56',
     'text': '#111111'
-}
-
-container = {
-    'float': 'left',
-    'width': '50%',
 }
 
 head = html.H1(
@@ -48,6 +37,7 @@ filterRadioButtons = html.Div(children = [
                         dcc.RadioItems(
                             id='filter-radio-buttons',
                             options={
+                                'None': 'None',
                                 'Red': 'Red',
                                 'Green': 'Green',
                                 'Blue': 'Blue',
@@ -58,12 +48,12 @@ filterRadioButtons = html.Div(children = [
                                 'Red-greeness': 'Red-greeness',
                                 'Blue-yellowness': 'Blue-yellowness'
                             },
-                            value='Red'
-                        )
+                            value='None'
+                        ),
+                        html.Br(), html.Br()
                     ],
                     style={
                         'width': '100%',
-                        'height': '40vh'
                     }
                 )
 
@@ -78,7 +68,6 @@ inputContainer = html.Div(children=[
                     'textAlign': 'center',
                     'float': 'left',
                     'width': '45%',
-                    'height': '100vh',
                     'backgroundColor': colors['inpBackground'],
                 }
                 )
@@ -88,10 +77,10 @@ outputContainer = html.Div(
                         'textAlign': 'center',
                         'float': 'left',
                         'width': '55%',
-                        'height': '100vh',
                         'backgroundColor': colors['outBackground']
                     },
                     children=[
+                        html.Br(),
                         html.H3(children="Uploaded image"),
                         html.Div(
                             id='output-image-upload',
@@ -102,7 +91,7 @@ outputContainer = html.Div(
                             } 
                         ),
                         html.Hr(style={'border-color':colors['inpBackground']}),
-                        html.H3(id='selected-filter', children="Selected RED filter"),
+                        html.H3(id='selected-filter', children="Selected channel: NONE"),
                         html.Div(
                             id='output-color-spaced-image',
                             style={
@@ -121,6 +110,7 @@ outputContainer = html.Div(
                                 'backgroundColor': colors['inpBackground'],
                             } 
                         ),
+                        html.Br()
                     ]
                 )
 
@@ -132,6 +122,5 @@ mainContainer = html.Div(
                     ],
                     style={
                         'width': '100%',
-                        'height': '100vh',
                     }
                 )
