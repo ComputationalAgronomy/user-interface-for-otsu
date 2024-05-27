@@ -1,12 +1,10 @@
-from dash import Dash, html, dcc, callback, Output, Input, State, no_update
+from dash import Dash, html, callback, Output, Input, State, no_update
 import dash
-import plotly.express as px, pandas as pd, datetime, numpy as np
-import argparse, cv2
+import pandas as pd, numpy as np
+import cv2
 import components as comp
 
 import base64
-from PIL import Image
-from io import BytesIO
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
