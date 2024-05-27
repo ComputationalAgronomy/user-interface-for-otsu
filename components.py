@@ -34,13 +34,12 @@ uploadImages = dcc.Upload(
                     ]),
                     style={
                         'width': '70%',
-                        'height': '60px',
                         'lineHeight': '60px',
                         'borderWidth': '1px',
                         'borderStyle': 'dashed',
                         'borderRadius': '5px',
                         'textAlign': 'center',
-                        'margin': 'auto'
+                        'margin': 'auto',
                     },
                     multiple=True
                 )
@@ -61,7 +60,12 @@ filterRadioButtons = html.Div(children = [
                             },
                             value='Red'
                         )
-                    ])
+                    ],
+                    style={
+                        'width': '100%',
+                        'height': '40vh'
+                    }
+                )
 
 inputContainer = html.Div(children=[
                     html.H3(children="Upload images to be segmented"),
@@ -73,7 +77,7 @@ inputContainer = html.Div(children=[
                 style={
                     'textAlign': 'center',
                     'float': 'left',
-                    'width': '50%',
+                    'width': '45%',
                     'height': '100vh',
                     'backgroundColor': colors['inpBackground'],
                 }
@@ -83,7 +87,7 @@ outputContainer = html.Div(
                     style={
                         'textAlign': 'center',
                         'float': 'left',
-                        'width': '50%',
+                        'width': '55%',
                         'height': '100vh',
                         'backgroundColor': colors['outBackground']
                     },
@@ -92,44 +96,42 @@ outputContainer = html.Div(
                         html.Div(
                             id='output-image-upload',
                             style={
-                                'width': '80%',
+                                'width': '90%',
                                 'margin': 'auto', 
                                 'backgroundColor': colors['inpBackground'],
                             } 
                         ),
-                        html.Hr(),
-                        html.H3(id='selected-filter'),
-                        html.Hr(),
+                        html.Hr(style={'border-color':colors['inpBackground']}),
+                        html.H3(id='selected-filter', children="Selected RED filter"),
                         html.Div(
                             id='output-color-spaced-image',
                             style={
-                                'width': '80%',
-                                'margin': 'auto', 
+                                'width': '90%',
+                                'margin': 'auto',
                                 'backgroundColor': colors['inpBackground'],
                             } 
-                        )
+                        ),
+                        html.Hr(style={'border-color':colors['inpBackground']}),
+                        html.H3(children="Otsu thresholded image"),
+                        html.Div(
+                            id='otsu-image',
+                            style={
+                                'width': '90%',
+                                'margin': 'auto',
+                                'backgroundColor': colors['inpBackground'],
+                            } 
+                        ),
                     ]
                 )
 
 mainContainer = html.Div(
                     children=[
                         head,
-                        html.Div(
-                            id='main-container',
-                            children=[
-                                inputContainer,
-                                outputContainer
-                            ],
-                            style={
-                                'width': '100%',
-                                'height': '100vh',
-                                'backgroundColor': colors['inpBackground']
-                            }
-                        )
+                        inputContainer,
+                        outputContainer
                     ],
                     style={
                         'width': '100%',
                         'height': '100vh',
-                        'backgroundColor': colors['inpBackground']
                     }
                 )
